@@ -1,6 +1,8 @@
 
+CFLAGS = -g -Wall
 all :
-	g++ Date.cpp -o Date
+	g++ $(CFLAGS) Date.cpp -o Date
+	g++ $(CFLAGS) explicit.cpp -o explicit
 
 clean :
-	rm -rf *.o Date
+	rm -rf *.o Date explicit
