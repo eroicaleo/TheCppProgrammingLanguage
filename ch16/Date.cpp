@@ -25,10 +25,11 @@ class Date {
 	void compute_cache_value() const;
 	void compute_cache_value_indirection() const;
 
+	static Date default_date;
+
 	public:
 	void init(int dd, int mm, int yy);
-	Date(int dd, int mm, int yy);
-	Date();
+	Date(int dd = 0, int mm = 0, int yy = 0);
 	Date(const Date &);
 	~Date();
 	Date &add_year(int n);
@@ -41,7 +42,17 @@ class Date {
 	string string_rep_indirection() const;
 
 	const Date &operator=(const Date &);
+
+	static void set_default_date(int dd, int mm, int yy);
 };
+
+// Beethoven's Birthday
+Date Date::default_date(16, 12, 1770);
+void Date::set_default_date(int dd, int mm, int yy) {
+	default_date.d = dd;
+	default_date.m = mm;
+	default_date.y = yy;
+}
 
 Date::Date(const Date &d1) {
 	d = d1.d;
@@ -123,8 +134,14 @@ void f() {
 	cout << tomorrow.string_rep() << endl;
 	cout << tomorrow.string_rep_indirection() << endl;
 
-	Date d1 = today;
-	Date d2(today);
+	Date d1;
+	cout << d1.string_rep() << endl;
+	cout << d1.string_rep_indirection() << endl;
+	// J.S. Bach's Birthday
+	Date::set_default_date(31, 3, 1675);
+	Date d2;
+	cout << d2.string_rep() << endl;
+	cout << d2.string_rep_indirection() << endl;
 }
 
 void f2(Date &d, const Date &cd) {
@@ -152,20 +169,10 @@ Date::Date(int dd, int mm, int yy) :
 	cache_valid(false),
 	rep("")
 {
-	d = dd;
-	m = mm;
-	y = yy;
+	d = dd ? dd : default_date.d;
+	m = mm ? mm : default_date.m;
+	y = yy ? yy : default_date.y;
 	c = new cache();
-}
-
-Date::Date() :
-	cache_valid(false),
-	rep(""),
-	c(NULL)
-{
-	d = 0;
-	m = 0;
-	y = 0;
 }
 
 Date& Date::add_day(int n) {
