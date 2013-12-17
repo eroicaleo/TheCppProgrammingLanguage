@@ -12,6 +12,10 @@ struct cache {
 	string rep;
 };
 
+inline bool leapyear(int n) {
+	return (n % 4 == 0);
+}
+
 class Date {
 	int d, m, y;
 	mutable bool cache_valid;
@@ -27,9 +31,9 @@ class Date {
 	Date();
 	Date(const Date &);
 	~Date();
-	void add_year(int n);
-	void add_month(int n);
-	void add_day(int n);
+	Date &add_year(int n);
+	Date &add_month(int n);
+	Date &add_day(int n);
 	int day() const { return d; }
 	int month() const { return m; }
 	int year() const { return y; }
@@ -164,12 +168,22 @@ Date::Date() :
 	y = 0;
 }
 
-void Date::add_day(int n) {
+Date& Date::add_day(int n) {
 	d += n;
+	// This is an error
+	// this = NULL;
+	// This is another error
+	// Date **d1 = &this;
+	return *this;
 }
 
-void Date::add_year(int n) {
+Date& Date::add_year(int n) {
+	if (d == 29 && m == 2 && !leapyear(y+n)) {
+		d = 1;
+		m = 3;
+	}
 	y += n;
+	return *this;
 }
 
 Date::~Date() {
