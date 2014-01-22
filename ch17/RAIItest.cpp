@@ -19,6 +19,11 @@ private:
 	private:
 		int *def;
 	};
+	struct X_sub {
+		X_sub() { clog << "I'am in X_sub()" << endl; }
+		~X_sub() { clog << "I'am in ~X_sub()" << endl; }
+	};
+	X_sub xs;
 	def_mem def;
 	int sz;
 	int *elem;
