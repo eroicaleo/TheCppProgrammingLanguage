@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = string Tracer
+BINARY = string Tracer Vector RAIItest
 
 all : $(BINARY)
 
@@ -11,4 +11,4 @@ all : $(BINARY)
 	g++ $(CFLAGS) $^ -o $@
 
 clean :
-	rm -rf *.o string
+	rm -rf *.o $(BINARY)
