@@ -7,26 +7,36 @@ struct X {
 	X(int s);
 	~X();
 private:
-	int *def;
+	struct def_mem {
+		def_mem() {
+			def = new int[10];
+			clog << "I have constructed def_mem" << endl;
+		}
+		~def_mem() {
+			delete [] def;
+			clog << "I have freed def" << endl;
+		}
+	private:
+		int *def;
+	};
+	def_mem def;
 	int sz;
 	int *elem;
 };
 
 X::X(int s) {
-	def = new int[10];
 	if (s < 0) { 
 		throw invalid_argument("size less than 0");
 	}
 	sz = s;
 	elem = new int[sz];
+	clog << "I have constructed X" << endl;
 }
 
 X::~X() {
 	clog << "I am in ~X() sz = " << sz << endl;
 	delete [] elem;
 	clog << "I have freed elem" << endl;
-	delete [] def;
-	clog << "I have freed def" << endl;
 }
 
 int main() {
