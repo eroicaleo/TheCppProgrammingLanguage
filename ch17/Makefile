@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = string Tracer Vector RAIItest
+BINARY = string Tracer Vector RAIItest VirtualDestructor
 
 all : $(BINARY)
 
