@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = Matrix Entangled
+BINARY = Matrix Entangled Slicing
 
 all : $(BINARY)
 
