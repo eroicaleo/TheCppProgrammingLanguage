@@ -8,6 +8,10 @@ template<class T>
 class Matrix {
 	array<int, 2> dim;
 	T *elem;
+	template<class S>
+		friend Matrix<S> operator+(const Matrix<S> &T1, const Matrix<S> &T2);
+	template<class R> 
+		friend ostream& operator<<(ostream &os, const Matrix<R>& M);
 public:
 	Matrix(int d1, int d2): dim{{d1, d2}}, elem { new T[d1*d2] } {}
 	size_t size() const { return dim[0]*dim[1]; }
@@ -15,13 +19,54 @@ public:
 	Matrix(const Matrix &);
 	Matrix &operator=(const Matrix &);
 
-	Matrix(Matrix&&) {};
-	Matrix& operator=(Matrix&&) {};
+	Matrix(Matrix&&);
+	Matrix& operator=(Matrix&&);
 
 	~Matrix() { delete[] elem; }
+	
 
 	T& operator[](size_t i);
 };
+
+template<class T>
+ostream& operator<<(ostream &os, const Matrix<T>& M) {
+	auto n = M.size();
+	for (size_t i = 0; i != n; ++i) {
+		os << M.elem[i] << " ";
+	}
+	return os;
+}
+
+template<class T>
+Matrix<T> operator+(const Matrix<T> &T1, const Matrix<T> &T2) {
+	if (T1.dim[0] != T2.dim[0] || T1.dim[1] != T2.dim[1]) {
+		throw runtime_error("bad size in Matrix +");
+	}
+	cout << "I am in operator+ " << endl;
+	Matrix<T> tmp{T1.dim[0], T1.dim[1]};
+	auto n = T1.size();
+	for (size_t i = 0; i != n; ++i) {
+		tmp.elem[i] = T1.elem[i] + T2.elem[i];
+	}
+	return tmp;
+}
+
+template<class T>
+Matrix<T>::Matrix(Matrix&& m):
+	dim(m.dim),
+	elem{m.elem} {
+		cout << "Call the move constructor " << endl;
+		m.dim = {{0, 0}};
+		m.elem = nullptr;
+}
+
+template<class T>
+Matrix<T>& Matrix<T>::operator=(Matrix&& m) {
+	cout << "Call the move operator= " << endl;
+	swap(dim, m.dim);
+	swap(elem, m.elem);
+	return *this;
+}
 
 template<class T>
 Matrix<T>::Matrix(const Matrix& m):
@@ -50,7 +95,7 @@ T& Matrix<T>::operator[](size_t i) {
 }
 
 int f() {
-	int i;
+	int i = 0;
 	cout << i << endl;
 	return i;
 }
@@ -61,20 +106,21 @@ int main() {
 	for (size_t i = 0; i < m0.size(); ++i) {
 		m0[i] = i;
 	}
-	for (size_t i = 0; i < m0.size(); ++i) {
-		cout << m0[i] << " ";
-	}
-	cout << endl;
+	cout << m0 << endl;
 	Matrix<int> m1{m0};
-	for (size_t i = 0; i < m1.size(); ++i) {
-		cout << m1[i] << " ";
-	}
-	cout << endl;
+	cout << m1 << endl;
 	Matrix<int> m2(10, 9);
 	m2 = m0;
 	for (size_t i = 0; i < m2.size(); ++i) {
-		cout << m2[i] << " ";
+		m2[i] = -i;
 	}
-	cout << endl;
+	cout << m2 << endl;
+	cout << "creating m3" << endl;
+	Matrix<int> m3 = m0 + m2;
+	cout << m3 << endl;
+	cout << "creating m4" << endl;
+	Matrix<int> m4 = m0;
+	m4 = m0 + m2;
+	cout << m4 << endl;
 	return 0;
 }
