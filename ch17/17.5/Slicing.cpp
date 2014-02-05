@@ -10,7 +10,7 @@ struct B {
 	}
 };
 
-struct D : private B {
+struct D : B {
 	int d {88};
 	D() {}
 	D(const D& d) {
