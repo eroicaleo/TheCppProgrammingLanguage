@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = Predefined
+BINARY = OperatorsUserDefinedTypes Predefined
 
 all : $(BINARY)
 
