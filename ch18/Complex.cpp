@@ -31,7 +31,7 @@ Complex Complex::operator*(Complex c) {
 }
 
 void f() {
-	Complex a = Complex{1, 3.1};
+	Complex a = {1, 3.1};
 	cout << a << endl;
 	Complex b {1.2, 2};
 	cout << b << endl;
