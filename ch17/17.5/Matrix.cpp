@@ -26,6 +26,7 @@ public:
 	
 
 	T& operator[](size_t i);
+	Matrix& operator+=(const Matrix &);
 };
 
 template<class T>
@@ -39,16 +40,28 @@ ostream& operator<<(ostream &os, const Matrix<T>& M) {
 
 template<class T>
 Matrix<T> operator+(const Matrix<T> &T1, const Matrix<T> &T2) {
-	if (T1.dim[0] != T2.dim[0] || T1.dim[1] != T2.dim[1]) {
-		throw runtime_error("bad size in Matrix +");
-	}
+	
 	cout << "I am in operator+ " << endl;
-	Matrix<T> tmp{T1.dim[0], T1.dim[1]};
-	auto n = T1.size();
-	for (size_t i = 0; i != n; ++i) {
-		tmp.elem[i] = T1.elem[i] + T2.elem[i];
+	Matrix<T> res {T1};
+	res += T2;
+	return res;
+}
+
+template<class T>
+Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &a) {
+	if (dim[0] != a.dim[0] || dim[1] != a.dim[1]) {
+		throw runtime_error("Bad Matrix += argument");
 	}
-	return tmp;
+	cout << "I am in operator+= " << endl;
+
+	T* p = elem;
+	T* q = a.elem;
+	T* end = elem + dim[0]*dim[1];
+	while (p != end) {
+		*p++ = *q++;
+	}
+
+	return *this;
 }
 
 template<class T>
