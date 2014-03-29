@@ -11,6 +11,8 @@ public:
 	Complex operator*(Complex);
 	double imag() const { return im; }
 	double real() const { return re; }
+	void imag(double i) { im = i; }
+	void real(double r) { re = r; }
 	friend ostream &operator<<(ostream &os, Complex c);
 };
 
