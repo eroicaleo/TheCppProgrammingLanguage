@@ -15,3 +15,20 @@ If we want to a operator take built-in type, it can not be an member function
 ### 18.2.4 Passing objects
 For small object, we use pass by value. For large object, we pass by reference. If we do not intend to change it, we pass by const reference.
 For return value, we normally do not return reference or pointer. But if we return a one of the arguments, we normally return reference.
+
+Chapter 19 Special operators
+==========
+
+section 19.1 Introduction
+-------------------------
+The special operators are
+[], (), ->, ++, --, new, delete
+
+### section 19.2.1 subscripting
+
+If you want to get a reference of a vector element.
+use for (auto& x: vec) {...}
+not for (auto x: vec) {...}
+
+The subscripting operator has to be non-static member function.
+
