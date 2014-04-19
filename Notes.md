@@ -44,3 +44,6 @@ operator is also known as the application operator.
 2. These objects are called function objects.
 3. allow us to write code that take nontrivial operations as parameters.
 4. In many cases, function objects need to hold data to perform their operations.
+
+The function call operator has to be non-static member function.
+
