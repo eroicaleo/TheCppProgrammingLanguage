@@ -24,6 +24,8 @@ section 19.1 Introduction
 The special operators are
 [], (), ->, ++, --, new, delete
 
+subscripting, function call, dereference
+
 ### section 19.2.1 subscripting
 
 If you want to get a reference of a vector element.
@@ -32,3 +34,13 @@ not for (auto x: vec) {...}
 
 The subscripting operator has to be non-static member function.
 
+### section 19.2.2 function call
+
+Overloading the function call operator seems to be useful primarily for defining types
+that have only a single operation and for types for which one operation is predominant. The call
+operator is also known as the application operator.
+
+1. operator() provides function call syntax for object.
+2. These objects are called function objects.
+3. allow us to write code that take nontrivial operations as parameters.
+4. In many cases, function objects need to hold data to perform their operations.
