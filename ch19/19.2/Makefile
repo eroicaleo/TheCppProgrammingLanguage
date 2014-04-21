@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = Assoc
+BINARY = Assoc FunctionCall
 
 all : $(BINARY)
 
