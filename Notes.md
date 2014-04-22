@@ -47,3 +47,4 @@ operator is also known as the application operator.
 
 The function call operator has to be non-static member function.
 
+### section 19.2.3 dereferencing
