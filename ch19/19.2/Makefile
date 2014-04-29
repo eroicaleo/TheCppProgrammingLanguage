@@ -1,6 +1,6 @@
 
 CFLAGS = -std=c++11 -g -Wall
-BINARY = Assoc FunctionCall
+BINARY = Assoc FunctionCall DiskPtr
 
 all : $(BINARY)
 
