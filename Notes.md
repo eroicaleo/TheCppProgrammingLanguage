@@ -48,5 +48,18 @@ operator is also known as the application operator.
 The function call operator has to be non-static member function.
 
 ### section 19.2.3 dereferencing
+
+Overloading the dereferencing operator is used to create "smart pointer",
+an object that acts like pointer and in addition performs some actions whenever
+an object is accessed through them, like stdlib unique_ptr and shared_ptr.
+
+indirection is a key concept and overloading dereferencing operator provides a clean,
+direct, and efficient way of representing indirection. Iterator provides an example of this.
+
+Again, it needs to be non-static member function. It's return type must be a ptr to an object
+which you can apply ->. So Ptr<int> does not make any sense, becuase int type does not containt
+any members. However, template class does not
+check function until it is used. So we can still define it.
+
 ### section 19.2.4 Increment and Decrement
 ### section 19.2.5 Allocation adn Deallocation
