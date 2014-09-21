@@ -74,3 +74,6 @@ replacing global new and delete is not recommanded.
 
 section 19.3 A String class
 ---------------------------
+
+We first define the 6 functions:
+constructor/destructor/copy/move
