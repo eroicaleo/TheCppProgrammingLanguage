@@ -34,12 +34,32 @@ ostream& operator<<(ostream &os, const Employee &e) {
 	return os;
 }
 
+void f(Employee *e, Manager *m) {
+	list<Employee *> emlist = {e, m};
+}
+
+void g(Employee *e, Manager *m) {
+	Employee *ee = m;
+	// compile error: invalid conversion from ‘Employee*’ to ‘Manager*’
+	// Manager *mm = e;
+	// has to be:
+	Manager *mm = static_cast<Manager *>(e);
+	cout << "ee's department: " << ee->department << endl;
+	// Weird number: mm's level: 20616
+	cout << "mm's level: " << mm->level << endl;
+}
+
 int main() {
 	Employee Yang("Yang", "Ge");
 	Manager Mike("Mike", "Le");
 
 	cout << Yang << endl;
 	cout << Mike << endl;
+	cout << "sizeof Yang: " << sizeof(Yang) << endl;
+	cout << "sizeof Mike: " << sizeof(Mike) << endl;
+
+	f(&Yang, &Mike);
+	g(&Yang, &Mike);
 
 	return 0;
 }
