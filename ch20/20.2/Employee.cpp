@@ -14,8 +14,16 @@ public:
 		first_name {f},
 		family_name {l}
 	{}
+	string fullname() {
+		return first_name + " " + middle_initial + " " + family_name;
+	}
+	void print() {
+		cout << fullname() << endl;
+	}
+	friend ostream& operator<<(ostream &os, const Employee &e);
+private:
 	string first_name, family_name;
-	char middle_initial;
+	char middle_initial = '\0';
 	Date hiring_date;
 	short department;
 };
@@ -25,6 +33,11 @@ public:
 	Manager(string f, string l) :
 		Employee {f, l} {
 	}
+	void print() {
+		Employee::print();
+		cout << "Level: " << level << endl;
+	}
+private:
 	list<Employee *> group;
 	short level;
 };
@@ -44,9 +57,10 @@ void g(Employee *e, Manager *m) {
 	// Manager *mm = e;
 	// has to be:
 	Manager *mm = static_cast<Manager *>(e);
-	cout << "ee's department: " << ee->department << endl;
+	ee->print();
 	// Weird number: mm's level: 20616
-	cout << "mm's level: " << mm->level << endl;
+	// cout << "mm's level: " << mm->level << endl;
+	mm->print();
 }
 
 int main() {
