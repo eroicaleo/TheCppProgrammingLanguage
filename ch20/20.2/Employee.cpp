@@ -45,9 +45,24 @@ private:
 class Director : public Manager {
 public:
 	Director(string f, string l) :
+		// type ‘Employee’ is not a direct base of ‘Director’
+		// Employee {f, l},
 		Manager {f, l} {
 	}
 private:
+	void print() {
+		// This is OK.
+		Manager::print();
+		// This is OK too.
+		Employee::print();
+	}
+};
+
+class Assistant : public Employee {
+public:
+	Assistant(string f, string l) :
+		Employee(f, l) {
+	}
 };
 
 ostream& operator<<(ostream &os, const Employee &e) {
@@ -75,6 +90,7 @@ int main() {
 	Employee Yang("Yang", "Ge");
 	Manager Mike("Mike", "Le");
 	Director Kang("Kang", "Xiao");
+	Assistant Dee("Dee", "Wilson");
 
 	cout << Yang << endl;
 	cout << Mike << endl;
