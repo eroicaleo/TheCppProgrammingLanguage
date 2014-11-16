@@ -42,6 +42,14 @@ private:
 	short level;
 };
 
+class Director : public Manager {
+public:
+	Director(string f, string l) :
+		Manager {f, l} {
+	}
+private:
+};
+
 ostream& operator<<(ostream &os, const Employee &e) {
 	os << "First name: " << e.first_name << ", Last name: " << e.family_name << " is hired in: ";
 	return os;
@@ -66,14 +74,18 @@ void g(Employee *e, Manager *m) {
 int main() {
 	Employee Yang("Yang", "Ge");
 	Manager Mike("Mike", "Le");
+	Director Kang("Kang", "Xiao");
 
 	cout << Yang << endl;
 	cout << Mike << endl;
+	cout << Kang << endl;
 	cout << "sizeof Yang: " << sizeof(Yang) << endl;
 	cout << "sizeof Mike: " << sizeof(Mike) << endl;
+	cout << "sizeof Kang: " << sizeof(Kang) << endl;
 
 	f(&Yang, &Mike);
 	g(&Yang, &Mike);
+	f(&Mike, &Kang);
 
 	return 0;
 }
